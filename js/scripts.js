@@ -8,41 +8,35 @@
       scrollwheel: true,
       zoom: 8
     });
-    markers = [];
-    infowindows = [];
-    titles = ['isabelle', 'jimmy'];
-    lats = [52.35, 52.36];
-    lngs = [-1.17, -1.18];
-    contentStrings = ['hi im isabelle', 'hi im jimmy'];
 
-    for (i = 0; i < 2; i++) {
-      markers[i] = new google.maps.Marker({
-        position: {lat: lats[i], lng: lngs[i]},
+    var markers = [
+      ['Isabelle', 52.35, -1.17],
+      ['Jimmy', 52.55, -1.17]
+    ];
+
+    var infoWindowContent = [
+      ['HI IM ISABELLE'],
+      ['HI IM JIMMY']
+    ];
+
+    var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+    for (i = 0; i < markers.length; i++) {
+      var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+      marker = new google.maps.Marker({
+        position: position,
         map: map,
-        title: titles[i]
+        title: markers[i][0]
       });
-      infowindows[i] = new google.maps.InfoWindow({
-        content: contentStrings[i]
-      });
-      markers[i].addListener('click', function() {
-        infowindows[i].open(map, markers[i])
-      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infoWindow.setContent(infoWindowContent[i][0]);
+          infoWindow.open(map, marker);
+        }
+      })(marker, i));
     }
 
-    // var marker = new google.maps.Marker({
-    //   position: {lat: 52.35, lng: -1.17},
-    //   map: map,
-    //   title: 'first marker'
-    // });
-    //
-    // var contentString = 'hello world';
-    // var infowindow = new google.maps.InfoWindow({
-    //   content: contentString
-    // })
-    //
-    // marker.addListener('click', function() {
-    //   infowindow.open(map, marker)
-    // });
 
   }
 
