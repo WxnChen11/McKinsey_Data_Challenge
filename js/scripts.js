@@ -9,18 +9,22 @@
       zoom: 8
     });
 
+    // EDIT THIS: Construction project info: title, lat, lng
     var markers = [
       ['Isabelle', 52.35, -1.17],
       ['Jimmy', 52.55, -1.17]
     ];
 
+    // EDIT THIS: Popup content
     var infoWindowContent = [
       ['HI IM ISABELLE'],
       ['HI IM JIMMY']
     ];
 
+    // Display multiple markers on map.
     var infoWindow = new google.maps.InfoWindow(), marker, i;
 
+    // Loop through array of markers and place each on map.
     for (i = 0; i < markers.length; i++) {
       var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
       marker = new google.maps.Marker({
@@ -29,6 +33,7 @@
         title: markers[i][0]
       });
 
+      // Allow each marker to have an info window.
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
           infoWindow.setContent(infoWindowContent[i][0]);
