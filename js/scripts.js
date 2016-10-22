@@ -12,13 +12,18 @@
     var markers = [];
     markers[0] = new google.maps.Marker({
       position: {lat: 52.35, lng: -1.17},
-      map: map
+      map: map,
+      title: 'first marker'
     });
 
     var contentString = 'hello world';
     var infowindow = new google.maps.InfoWindow({
-      content: contentString;
+      content: contentString
     })
+
+    marker.addListener('click', function() {
+      infowindow.open(map, marker)
+    });
   }
 
 
