@@ -14,10 +14,12 @@
       ['Isabelle', 52.35, -1.17],
       ['Jimmy', 52.55, -1.17]
     ];
-
+    var mark = {
+      name: 'mark'
+    };
     // EDIT THIS: Popup content
     var infoWindowContent = [
-      ['sample text' +
+      ['sample text' + 'f' +
       '<p></p>' +
       '<button type="button" class="btn btn-info btn-xs" data-toggle="modal" ' +
        'data-target="#myModal">See more</button>'],
