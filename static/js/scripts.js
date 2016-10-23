@@ -6,6 +6,11 @@ httpGetAsync("http://127.0.0.1:8000/static/js/data.json", function(resp){
   data = jQuery.parseJSON(data);
 });
 */
+
+$('input[type="checkbox"]').on('change', function() {
+    $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+});
+
 function initMap() {
     // Create a map object and specify the DOM element for display.
     var styledMapType = new google.maps.StyledMapType(
@@ -1253,6 +1258,23 @@ function update_opac(data) {
     //console.log(data);
     //console.log(data["E02000364"]);
 
+    max = 0;
+    min = 2;
+    temp = 0;
+
+    map.data.forEach(function(feature){
+        var id = feature.f.MSOA11CD;
+        var region = data[id];
+        temp = (region.activity * activity + region.age19to25 * age19to25 + region.indian * indian + region.chinese * chinese + region.age26to40 * age26to40 + region.black * black + region.age0to12 * age0to12 + region.income_mid * med + region.income_low * low + region.income_high * high + region.female * female + region.white * white + region.age61to90 * age61to90 + region.male * male + region.age41to60 * age41to60 + region.age13to18 * age13to18) / total;
+        if(temp > max){
+          max = temp;
+        }
+        else if (temp < min){
+          min = temp;
+        }
+    });
+
+
     map.data.setStyle(function(feature) {
         var color = 'lawngreen';
         var id = feature.f.MSOA11CD;
@@ -1261,7 +1283,7 @@ function update_opac(data) {
         if (total == 0) {
 
         } else {
-            opac = (region.activity * activity + region.age19to25 * age19to25 + region.indian * indian + region.chinese * chinese + region.age26to40 * age26to40 + region.black * black + region.age0to12 * age0to12 + region.income_mid * med + region.income_low * low + region.income_high * high + region.female * female + region.white * white + region.age61to90 * age61to90 + region.male * male + region.age41to60 * age41to60 + region.age13to18 * age13to18) / total;
+            opac = (((region.activity * activity + region.age19to25 * age19to25 + region.indian * indian + region.chinese * chinese + region.age26to40 * age26to40 + region.black * black + region.age0to12 * age0to12 + region.income_mid * med + region.income_low * low + region.income_high * high + region.female * female + region.white * white + region.age61to90 * age61to90 + region.male * male + region.age41to60 * age41to60 + region.age13to18 * age13to18) / total)-min)/(max-min);
         }
         //console.log(feature);
         return /** @type {google.maps.Data.StyleOptions} */ ({

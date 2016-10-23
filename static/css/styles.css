@@ -54,6 +54,7 @@ body{
 	height:100%;
   background-color: #2f4b6c;
   color:#efefef;
+  font-size:14px;
 }
 
 #map-canvas {
