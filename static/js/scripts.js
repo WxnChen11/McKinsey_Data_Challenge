@@ -125,7 +125,7 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map-canvas'), {
         center: {
             lat: 51.50,
-            lng: 0
+            lng: -0.1
         },
         scrollwheel: true,
         zoom: 11
