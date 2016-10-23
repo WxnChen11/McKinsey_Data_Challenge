@@ -18,7 +18,7 @@
 <body>
 	<!-- begin template -->
 	<div class="navbar navbar-custom navbar-fixed-top">
-		<div class="navbar-header"><a class="navbar-brand" href="#">Brand</a>
+		<div class="navbar-header"><a class="navbar-brand" href="#"></a>
 			<a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -38,11 +38,7 @@
 						<div class="input-group-btn">
 							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>
 							<ul class="dropdown-menu">
-								<li><a href="#">Category 1</a></li>
-								<li><a href="#">Category 2</a></li>
-								<li><a href="#">Category 3</a></li>
-								<li><a href="#">Category 4</a></li>
-								<li><a href="#">Category 5</a></li>
+								<li><a href="#">Options</a></li>
 							</ul>
 						</div>
 						<input type="text" class="form-control" placeholder="Where do you want to search?">
@@ -58,26 +54,75 @@
 		<div class="row">
 			<div class="col-xs-12" id="left">
 
-				<h2>Choose your audience</h2>
+				<h3>Choose your audience</h3>
+				<hr>
 
 				<!-- item list -->
 
+				<h4>Gender</h4>
+				<div class='row'>
+				<div class='col-md-6'>
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" value="">Option 1</label>
+						<input type="checkbox" value="" id="male_cb">Male</label>
 				</div>
+			</div>
+			<div class='col-md-6'>
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" value="">Option 2</label>
+						<input type="checkbox" value="" id="female_cb">Female</label>
 				</div>
-				<div class="checkbox disabled">
-					<label>
-						<input type="checkbox" value="" disabled>Option 3</label>
+			  </div>
+			</div>
+				<hr>
+				<h4>Ethnicity</h4>
+				<div class='row'>
+					<div class='col-md-6'>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="" id="asian_cb">Asian</label>
+					</div>
+				</div>
+					<div class='col-md-6'>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" value="" id="caucasian_cb">Caucasian</label>
+						</div>
+					</div>
+				</div>
+				<hr>
+
+				<h4>Income</h4>
+				<div class='row'>
+					<div class='col-md-6'>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" value="" id="lowinc_cb">Low</label>
+						</div>
+					</div>
+					<div class='col-md-6'>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" value="" id="medinc_cb">Medium</label>
+						</div>
+					</div>
 				</div>
 
-				<hr>
+				<div class='row'>
+					<div class='col-md-6'>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" value="" id="highinc_cb">High</label>
+						</div>
+					</div>
+				</div>
+
+
 				<!-- /item list -->
 				<hr>
+				<button type="button" class="btn btn-success" id="update_btn" onclick="update_onclick()">Update</button>
+
+
 
 			</div>
 			<div class="col-xs-4">

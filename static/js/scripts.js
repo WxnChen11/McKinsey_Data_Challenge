@@ -1,6 +1,12 @@
 
 //google.maps.event.addDomListener(window, 'load', initialize);
 
+httpGetAsync("http://127.0.0.1:8000/static/js/data.json", function(resp){
+  data = resp;
+  console.log(data);
+  data = jQuery.parseJSON(data);
+});
+
   function initMap() {
     // Create a map object and specify the DOM element for display.
     var styledMapType = new google.maps.StyledMapType(
@@ -116,7 +122,7 @@
             ],
             {name: 'Styled Map'});
 
-    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+    map = new google.maps.Map(document.getElementById('map-canvas'), {
       center: {lat: 51.50, lng: 0},
       scrollwheel: true,
       zoom: 11
@@ -1079,9 +1085,14 @@
     for (var i = 0; i < geoJSONs.length; i++){
       map.data.loadGeoJson('static/js/geojson/'+geoJSONs[i]);
     }
+    var disp = true;
     map.data.setStyle(function(feature) {
       var color = 'gray';
-      var opacity = Math.random()*0.9 + 0.1;
+      var opacity = Math.random()*0.6 + 0.2;
+      if(disp){
+        console.log(feature.f.MSOA11CD);
+        disp = false;
+      }
       return /** @type {google.maps.Data.StyleOptions} */({
         fillColor: "green",
         strokeColor: color,
@@ -1089,72 +1100,85 @@
         fillOpacity: opacity
       });
     });
-
-    /*
-    map.data.loadGeoJson(
-    'http://statistics.data.gov.uk/boundaries/E06000047.json');*/
-    // EDIT THIS: Construction project info: title, lat, lng
-    //var markers = [
-    //  ['Isabelle', 52.35, -1.17],
-    //  ['Jimmy', 52.55, -1.17]
-    //];
     var mark = {
       name: 'mark'
     };
-    // EDIT THIS: Popup conten
-    /*t
-    var infoWindowContent = [
-      ['sample text' + 'f' +
-      '<p></p>' +
-      '<button type="button" class="btn btn-info btn-xs" data-toggle="modal" ' +
-       'data-target="#myModal">See more</button>'],
-      ['HI IM JIMMY']
-    ];*/
 
-    // Display multiple markers on map.
-    //var infoWindow = new google.maps.InfoWindow(), marker, i;
-
-    /* Loop through array of markers and place each on map.
-    for (i = 0; i < markers.length; i++) {
-      var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
-      marker = new google.maps.Marker({
-        position: position,
-        map: map,
-        title: markers[i][0]
-      });
-
-      // Allow each marker to have an info window.
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infoWindow.setContent(infoWindowContent[i][0]);
-          infoWindow.open(map, marker);
-        }
-      })(marker, i));
-    }*/
+//Checkbox Trigger
 
 
   }
 
+  function update_onclick(){
+    update_opac(data);
+  }
 
-/*function initialize() {
+  function update_opac(data){
+    male = 0;
+    female = 0;
+    asian = 0;
+    caucasian = 0;
+    low = 0;
+    med = 0;
+    high = 0;
+    total = 0;
 
+    if (document.getElementById("male_cb").checked){
+        male = 1;
+        total += 1;
+    }
+    if (document.getElementById("female_cb").checked){
+      female = 1;
+      total += 1;
+    }
+    if(document.getElementById("asian_cb").checked){
+      asian = 1;
+      total += 1;
+    }
+    if(document.getElementById("caucasian_cb").checked){
+      caucasian = 1;
+      total += 1;
+    }
+    if(document.getElementById("lowinc_cb").checked){
+      low = 1;
+      total += 1;
+    }
+    if(document.getElementById("medinc_cb").checked){
+      med = 1;
+      total += 1;
+    }
+    if(document.getElementById("highinc_cb").checked){
+      high = 1;
+      total += 1;
+    }
 
-  var latlng = new google.maps.LatLng(52.3731, 4.8922);
+    console.log(data);
+    console.log(data["E02000364"]);
 
-  var mapOptions = {
-    center: latlng,
-    scrollWheel: false,
-    zoom: 13
-  };
+    map.data.setStyle(function(feature) {
+      var color = 'gray';
+      var id = feature.f.MSOA11CD;
+      var opac = data[id].activity; //MAKE SURE TO MULTIPLY BY 0 OR 1 HERE AND DIVIDE BY TOTAL
+      return /** @type {google.maps.Data.StyleOptions} */({
+        fillColor: "green",
+        strokeColor: color,
+        strokeWeight: 0.3,
+        fillOpacity: opac*0.6 + 0.2
+      });
+    });
+    var mark = {
+      name: 'mark'
+    };
 
-  var marker = new google.maps.Marker({
-    position: latlng,
-    url: '/',
-    animation: google.maps.Animation.DROP
-  });
+  }
 
-  var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-  marker.setMap(map);
-
-};*/
-/* end google maps -----------------------------------------------------*/
+function httpGetAsync(theUrl, callback)
+  {
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function() {
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+              callback(xmlHttp.responseText);
+      }
+      xmlHttp.open("GET", theUrl, true); // true for asynchronous
+      xmlHttp.send(null);
+  }
