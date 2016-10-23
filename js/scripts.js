@@ -17,7 +17,10 @@
 
     // EDIT THIS: Popup content
     var infoWindowContent = [
-      ['HI IM ISABELLE'],
+      ['sample text' +
+      '<p></p>' +
+      '<button type="button" class="btn btn-info btn-xs" data-toggle="modal" ' +
+       'data-target="#myModal">See more</button>'],
       ['HI IM JIMMY']
     ];
 
