@@ -1,4 +1,4 @@
-date,geography,code,,population,Ethnic Group: White; measures: Value,Ethnic Group: Asian / Asian British: Indian; measures: Value,Ethnic Group: Asian / Asian British: Chinese; measures: Value,Ethnic Group: Black / African / Caribbean / Black British; measures: Value,code,white,Indian,Chinese,black,white opacity,Indian opacity,Chinese opacity,black opacity
+date,geography,code,,population,Ethnic Group: White; measures: Value,Ethnic Group: Asian / Asian British: Indian; measures: Value,Ethnic Group: Asian / Asian British: Chinese; measures: Value,Ethnic Group: Black / African / Caribbean / Black British; measures: Value,code,white,Indian,Chinese,black,white_opacity,indian_opacity,chinese_opacity,black_opacity
 2011,Darlington 001,E02002559,16342,8842,8575,51,20,24,E02000166,6283,76,75,454,0.552290492,0.007726597,0.060352054,0.070503849
 2011,Darlington 002,E02002560,,5997,5860,32,2,15,E02000167,6731,163,121,148,0.596616207,0.020653789,0.09891031,0.016969909
 2011,Darlington 003,E02002561,,5741,5601,14,31,6,E02000168,6390,85,69,464,0.562877214,0.009063893,0.055322716,0.072253324
