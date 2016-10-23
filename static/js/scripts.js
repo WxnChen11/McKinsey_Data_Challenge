@@ -1138,7 +1138,7 @@ function initMap() {
     map.data.setStyle(function(feature) {
         var color = 'lawngreen';
         var id = feature.f.MSOA11CD;
-        var opac = data[id].activity; //MAKE SURE TO MULTIPLY BY 0 OR 1 HERE AND DIVIDE BY TOTAL
+        var opac = 0.3; //MAKE SURE TO MULTIPLY BY 0 OR 1 HERE AND DIVIDE BY TOTAL
         //console.log(feature);
         return /** @type {google.maps.Data.StyleOptions} */ ({
             fillColor: "green",
@@ -1199,12 +1199,21 @@ function update_onclick() {
 function update_opac(data) {
     male = 0;
     female = 0;
-    asian = 0;
-    caucasian = 0;
+    chinese = 0;
+    white = 0;
     low = 0;
     med = 0;
     high = 0;
     total = 0;
+    age0to12 = 0;
+    age13to18 = 0;
+    age19to25 = 0;
+    age26to40 = 0;
+    age41to60 = 0;
+    age61to90 = 0;
+    indian = 0;
+    black = 0;
+    activity = 0;
 
     if (document.getElementById("male_cb").checked) {
         male = 1;
@@ -1214,12 +1223,12 @@ function update_opac(data) {
         female = 1;
         total += 1;
     }
-    if (document.getElementById("asian_cb").checked) {
-        asian = 1;
+    if (document.getElementById("chinese_cb").checked) {
+        chinese = 1;
         total += 1;
     }
-    if (document.getElementById("caucasian_cb").checked) {
-        caucasian = 1;
+    if (document.getElementById("white_cb").checked) {
+        white = 1;
         total += 1;
     }
     if (document.getElementById("lowinc_cb").checked) {
@@ -1234,9 +1243,66 @@ function update_opac(data) {
         high = 1;
         total += 1;
     }
+    if (document.getElementById("age0to12").checked) {
+        age0to12 = 1;
+        total += 1;
+    }
+    if (document.getElementById("age13to18").checked) {
+        age13to18 = 1;
+        total += 1;
+    }
+    if (document.getElementById("age19to25").checked) {
+        age19to25 = 1;
+        total += 1;
+    }
+    if (document.getElementById("age26to40").checked) {
+        age26to40 = 1;
+        total += 1;
+    }
+    if (document.getElementById("age41to60").checked) {
+        age41to60 = 1;
+        total += 1;
+    }
+    if (document.getElementById("age61to90").checked) {
+        age61to90 = 1;
+        total += 1;
+    }
+    if (document.getElementById("indian_cb").checked) {
+        indian = 1;
+        total += 1;
+    }
+    if (document.getElementById("black_cb").checked) {
+        black = 1;
+        total += 1;
+    }
+    if (document.getElementById("activity_cb").checked) {
+        activity = 1;
+        total += 1;
+    }
 
-    console.log(data);
-    console.log(data["E02000364"]);
+
+    //console.log(data);
+    //console.log(data["E02000364"]);
+
+    map.data.setStyle(function(feature) {
+        var color = 'lawngreen';
+        var id = feature.f.MSOA11CD;
+        var region = data[id];
+        var opac = 0.3;
+        if (total == 0){
+            
+        }
+        else{
+          opac = (region.activity*activity + region.age19to25*age19to25 + region.indian*indian + region.chinese*chinese + region.age26to40*age26to40 + region.black*black + region.age0to12*age0to12 + region.income_mid*med + region.income_low*low + region.income_high*high + region.female*female + region.white*white + region.age61to90*age61to90 + region.male*male + region.age41to60*age41to60 + region.age13to18*age13to18)/total;
+        }
+        //console.log(feature);
+        return /** @type {google.maps.Data.StyleOptions} */ ({
+            fillColor: "green",
+            strokeColor: color,
+            strokeWeight: 0.3,
+            fillOpacity: opac*0.8 + 0.1 //*0.6 + 0.2
+        });
+    });
 
 }
 
