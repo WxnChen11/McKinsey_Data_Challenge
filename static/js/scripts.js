@@ -1123,7 +1123,11 @@ map.data.addListener('mouseover', function(event) {
     });
 });
 map.data.addListener('click', function(event) {
-    doModal(event.feature.f.MSOA11NM, JSON.stringify(data[event.feature.f.MSOA11CD]));
+    var string = '<p> Population: ' + data[event.feature.f.MSOA11CD]['population'] + '</p>';
+    string += '<p> Average Weekly Income: &#163;' + data[event.feature.f.MSOA11CD]['income'] + '</p>';
+    string += '<p> Raw JSON data: </p>'
+    string += '<pre><code>'+JSON.stringify(data[event.feature.f.MSOA11CD],null, 4)+'</pre></code>';
+    doModal(event.feature.f.MSOA11NM, string);
 });
 
 
@@ -1136,9 +1140,11 @@ function doModal(heading, formContent) {
     html += '<a class="close" data-dismiss="modal">×</a>';
     html += '<h4>' + heading + '</h4>'
     html += '</div>';
-    html += '<div class="modal-body">';
+    html += '<div class="modal-body" style="word-wrap:break-word">';
+    html += '<b> More Information </b>';
     html += '<p>';
     html += formContent;
+    html += '</p>';
     html += '</div>';
     html += '<div class="modal-footer">';
     html += '<span class="btn btn-primary" data-dismiss="modal">Close</span>';
