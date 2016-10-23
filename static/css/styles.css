@@ -28,7 +28,7 @@ body{
 
 .navbar-custom li>a:hover,.navbar-custom li>a:focus {
 	background-color:#49bfff;
-} 
+}
 
 .navbar-custom a{
     color:#fefefe;
@@ -47,7 +47,7 @@ body{
 
 #main>.row {
     overflow-y:scroll;
-    width: 30%;
+    width: 25%;
 }
 
 #left {
@@ -55,7 +55,7 @@ body{
 }
 
 #map-canvas {
-	width:70%;
+	width:75%;
     height:calc(100% - 0);
     position:absolute;
     right:16px;
